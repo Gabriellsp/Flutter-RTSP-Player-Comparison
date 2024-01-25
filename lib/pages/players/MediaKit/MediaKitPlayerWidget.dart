@@ -13,25 +13,54 @@ class MediaKitPlayerWidget extends StatefulWidget {
 class _MediaKitPlayerWidgetState extends State<MediaKitPlayerWidget> {
   late final player = Player();
   late final controller = VideoController(player);
+  String error = '';
 
   @override
   void initState() {
     super.initState();
     player.open(Media(widget.videoUrl));
+    player.stream.error.listen((String event) {
+      setState(() {
+        error = event;
+      });
+    });
   }
 
   @override
   void dispose() async {
-    super.dispose();
     await player.stop();
     await player.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Video(
-      height: 150,
-      controller: controller,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Video(
+          height: 150,
+          controller: controller,
+        ),
+        const SizedBox(
+          height: 4,
+        ),
+        Visibility(
+          visible: error.isNotEmpty,
+          child: Container(
+            color: Colors.red,
+            child: Center(
+              child: Text(
+                "Erro no MediaKit: $error",
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

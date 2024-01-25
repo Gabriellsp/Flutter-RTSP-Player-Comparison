@@ -10,33 +10,67 @@ class VlcPlayerWidget extends StatefulWidget {
 }
 
 class _VlcPlayerWidgetState extends State<VlcPlayerWidget> {
-  late VlcPlayerController _videoPlayerController;
+  late VlcPlayerController _controller;
+  String error = '';
 
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VlcPlayerController.network(
+    _controller = VlcPlayerController.network(
       widget.videoUrl,
       hwAcc: HwAcc.full,
       autoPlay: true,
       options: VlcPlayerOptions(),
     );
+    _controller.addListener(() => _checkErrorPlayer());
+  }
+
+  _checkErrorPlayer() {
+    if (_controller.value.hasError) {
+      setState(() {
+        error = _controller.value.errorDescription;
+      });
+    }
   }
 
   @override
   void dispose() async {
+    _controller.removeListener(() => _checkErrorPlayer());
+    await _controller.stop();
+    await _controller.stopRendererScanning();
+    await _controller.dispose();
     super.dispose();
-    await _videoPlayerController.stop();
-    await _videoPlayerController.stopRendererScanning();
-    await _videoPlayerController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return VlcPlayer(
-      controller: _videoPlayerController,
-      aspectRatio: 16 / 9,
-      placeholder: const Center(child: CircularProgressIndicator()),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        VlcPlayer(
+          controller: _controller,
+          aspectRatio: 16 / 9,
+          placeholder: const Center(child: CircularProgressIndicator()),
+        ),
+        const SizedBox(
+          height: 4,
+        ),
+        Visibility(
+          visible: error.isNotEmpty,
+          child: Container(
+            color: Colors.red,
+            child: Center(
+              child: Text(
+                "Erro no VlcPlayer: $error",
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

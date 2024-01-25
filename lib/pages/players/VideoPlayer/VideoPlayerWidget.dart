@@ -11,6 +11,7 @@ class VideoPlayerWidget extends StatefulWidget {
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController _controller;
+  String error = '';
 
   @override
   void initState() {
@@ -21,20 +22,55 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   }
 
   Future<void> initialize() async {
+    _controller.addListener(() => _checkErrorPlayer());
     await _controller.initialize();
     await _controller.play();
-    setState(() {});
+  }
+
+  _checkErrorPlayer() {
+    if (_controller.value.hasError) {
+      setState(() {
+        error =
+            _controller.value.errorDescription ?? "Descrição do erro vazia!";
+      });
+    }
   }
 
   @override
   void dispose() async {
-    // TODO: implement dispose
+    Future.microtask(() {
+      _controller.removeListener(() => _checkErrorPlayer());
+      _controller.dispose();
+    });
+
     super.dispose();
-    await _controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(height: 150, child: VideoPlayer(_controller));
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(height: 150, child: VideoPlayer(_controller)),
+        const SizedBox(
+          height: 4,
+        ),
+        Visibility(
+          visible: error.isNotEmpty,
+          child: Container(
+            color: Colors.red,
+            child: Center(
+              child: Text(
+                "Erro no VideoPlayer: $error",
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_player/db/db.dart';
 import 'package:flutter_player/pages/players/VideoPlayer/VideoPlayerPage.dart';
 
-class SelectVideoPlayerUrl extends StatefulWidget {
+class SelectVideoPlayerUrl extends StatelessWidget {
   const SelectVideoPlayerUrl({super.key});
 
-  @override
-  State<SelectVideoPlayerUrl> createState() => _SelectVideoPlayerUrlState();
-}
-
-class _SelectVideoPlayerUrlState extends State<SelectVideoPlayerUrl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

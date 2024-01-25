@@ -14,9 +14,9 @@ class _VlcPlayerPageState extends State<VlcPlayerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Vlc Player"),
       ),
-      backgroundColor: Colors.white,
       body: Center(
         child: VlcPlayerWidget(
           videoUrl: widget.videoUrl,

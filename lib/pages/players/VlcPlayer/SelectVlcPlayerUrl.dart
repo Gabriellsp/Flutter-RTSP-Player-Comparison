@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_player/db/db.dart';
-import 'package:flutter_player/pages/players/VlcPlayer/VlcPlayerWidget.dart';
+import 'package:flutter_player/pages/players/VlcPlayer/VlcPlayerPage.dart';
 
-class SelectVlcPlayerUrl extends StatefulWidget {
+class SelectVlcPlayerUrl extends StatelessWidget {
   const SelectVlcPlayerUrl({super.key});
 
-  @override
-  State<SelectVlcPlayerUrl> createState() => _SelectVlcPlayerUrlState();
-}
-
-class _SelectVlcPlayerUrlState extends State<SelectVlcPlayerUrl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +20,7 @@ class _SelectVlcPlayerUrlState extends State<SelectVlcPlayerUrl> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => VlcPlayerWidget(
+                      builder: (context) => VlcPlayerPage(
                             videoUrl: Db.hlsUrl,
                           )),
                 );
@@ -37,7 +32,7 @@ class _SelectVlcPlayerUrlState extends State<SelectVlcPlayerUrl> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => VlcPlayerWidget(
+                      builder: (context) => VlcPlayerPage(
                             videoUrl: Db.rtspUrl,
                           )),
                 );
@@ -49,7 +44,7 @@ class _SelectVlcPlayerUrlState extends State<SelectVlcPlayerUrl> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => VlcPlayerWidget(
+                      builder: (context) => VlcPlayerPage(
                             videoUrl: Db.rtspNimbleUrl,
                           )),
                 );
