@@ -1,4 +1,4 @@
-package com.example.flutter_player
+package com.seventh.rtsp_players_comparison
 
 import io.flutter.embedding.android.FlutterActivity
 
