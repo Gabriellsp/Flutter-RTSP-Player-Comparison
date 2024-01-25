@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_player/pages/all_players/AllPlayersPage.dart';
+import 'package:flutter_player/pages/all_players_hls/AllPlayersHlsPage.dart';
 import 'package:flutter_player/db/db.dart';
-import 'package:flutter_player/pages/players/FijkPlayer/FijkPlayerWidget.dart';
-import 'package:flutter_player/pages/players/MediaKit/MediaKitPlayerWidget.dart';
-import 'package:flutter_player/pages/players/VideoPlayer/VideoPlayerWidget.dart';
-import 'package:flutter_player/pages/players/VlcPlayer/VlcPlayerWidget.dart';
-import 'package:flutter_player/pages/video_player_vs_mediakit/VideoPlayer_VS_MediaKit.dart';
+import 'package:flutter_player/pages/compare_two_players/SelectTwoPlayers.dart';
+import 'package:flutter_player/pages/hls_vs_rtsp_nimble/HlsVsRtspNimblePage.dart';
+import 'package:flutter_player/pages/hls_vs_rtsp_puro/HlsVsRtspPuroPage.dart';
+import 'package:flutter_player/pages/players/FijkPlayer/SelectFijkPlayerUrl.dart';
+import 'package:flutter_player/pages/players/MediaKit/SelectMediaKitPlayerUrl.dart';
+import 'package:flutter_player/pages/players/VideoPlayer/SelectVideoPlayerUrl.dart';
+import 'package:flutter_player/pages/players/VlcPlayer/SelectVlcPlayerUrl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,7 +38,36 @@ class _HomePageState extends State<HomePage> {
             children: [
               Row(
                 children: [
-                  const Text("RTSP Câmera: "),
+                  const Text(
+                    "Hls: ",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      height: 32,
+                      child: TextField(
+                        controller: _hlsTextController,
+                        onChanged: (value) {
+                          Db.hlsUrl = value;
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Row(
+                children: [
+                  const Text(
+                    "RTSP Câmera: ",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   Expanded(
                     child: SizedBox(
                       height: 32,
@@ -56,7 +87,12 @@ class _HomePageState extends State<HomePage> {
               ),
               Row(
                 children: [
-                  const Text("RTSP Nimble: "),
+                  const Text(
+                    "RTSP Nimble: ",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   Expanded(
                     child: SizedBox(
                       height: 32,
@@ -71,26 +107,17 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               const SizedBox(
-                height: 8,
+                height: 24,
               ),
-              Row(
-                children: [
-                  const Text("Hls: "),
-                  Expanded(
-                    child: SizedBox(
-                      height: 32,
-                      child: TextField(
-                        controller: _hlsTextController,
-                        onChanged: (value) {
-                          Db.hlsUrl = value;
-                        },
-                      ),
-                    ),
-                  ),
-                ],
+              const Text(
+                "Players individuais: ",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(
-                height: 64,
+                height: 16,
               ),
               GridView.count(
                 primary: false,
@@ -98,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
                 crossAxisCount: 2,
-                childAspectRatio: 2 / 1,
+                childAspectRatio: 3 / 1,
                 shrinkWrap: true,
                 children: <Widget>[
                   ElevatedButton(
@@ -106,92 +133,39 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                                  appBar: AppBar(
-                                    backgroundColor: Theme.of(context)
-                                        .colorScheme
-                                        .inversePrimary,
-                                    title: const Text("FijkPlayer"),
-                                  ),
-                                  body: const Center(
-                                    child: FijkPlayerWidget(
-                                      videoUrl:
-                                          "rtsp://admin:Seventh@23@187.49.236.67:45869/cam/realmonitor?channel=1&subtype=0",
-                                    ),
-                                  ),
-                                )),
+                            builder: (context) => const SelectVideoPlayerUrl()),
                       );
                     },
-                    child: const Text('FijkPlayer'),
+                    child: const Text(
+                      'VideoPlayer',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                                  appBar: AppBar(
-                                    backgroundColor: Theme.of(context)
-                                        .colorScheme
-                                        .inversePrimary,
-                                    title: const Text("MediaKit Player"),
-                                  ),
-                                  body: const Center(
-                                    child: MediaKitPlayerWidget(
-                                      videoUrl:
-                                          "rtsp://admin:Seventh@23@187.49.236.67:45869/cam/realmonitor?channel=1&subtype=0",
-                                    ),
-                                  ),
-                                )),
+                            builder: (context) => const SelectVlcPlayerUrl()),
                       );
                     },
-                    child: const Text('MediaKit'),
+                    child: const Text(
+                      'VlcPlayer',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                                  appBar: AppBar(
-                                    backgroundColor: Theme.of(context)
-                                        .colorScheme
-                                        .inversePrimary,
-                                    title: const Text("Video Player"),
-                                  ),
-                                  body: const Center(
-                                    child: VideoPlayerWidget(
-                                      videoUrl:
-                                          'https://cloudcam01-development.dguardcloud.com.br/live/5F2gNJ2el.stream/playlist.m3u8',
-                                    ),
-                                  ),
-                                )),
+                            builder: (context) => const SelectFijkPlayerUrl()),
                       );
                     },
-                    child: const Text('VideoPlayer'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                                  appBar: AppBar(
-                                    backgroundColor: Theme.of(context)
-                                        .colorScheme
-                                        .inversePrimary,
-                                    title: const Text("Vlc Player"),
-                                  ),
-                                  body: const Center(
-                                    child: VlcPlayerWidget(
-                                      videoUrl:
-                                          "rtsp://admin:Seventh@23@187.49.236.67:45869/cam/realmonitor?channel=1&subtype=0",
-                                    ),
-                                  ),
-                                )),
-                      );
-                    },
-                    child: const Text('Vlc Player'),
+                    child: const Text(
+                      'FijkPlayer',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -199,20 +173,89 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const VideoPlayerVSMediaKit()),
+                                const SelectMediaKitPlayerUrl()),
                       );
                     },
-                    child: const Text('VideoPlayer Vs MediaKit'),
+                    child: const Text(
+                      'MediaKit',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              const Text(
+                "Comparação entre players: ",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(0),
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                crossAxisCount: 2,
+                childAspectRatio: 3 / 1,
+                shrinkWrap: true,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HlsVsRtspPuroPage()),
+                      );
+                    },
+                    child: const Text(
+                      'HLS Vs RTSP',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const AllPlayersPage()),
+                            builder: (context) => const HlsVsRtspNimblePage()),
                       );
                     },
-                    child: const Text('Todos os players'),
+                    child: const Text(
+                      'HLS Vs RTSP Nimble',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AllPlayersHlsPage()),
+                      );
+                    },
+                    child: const Text(
+                      'Todos os players Hls',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SelectTwoPlayers()),
+                      );
+                    },
+                    child: const Text(
+                      'Comparar 2 players',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),

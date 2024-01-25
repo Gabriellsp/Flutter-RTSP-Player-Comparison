@@ -23,6 +23,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   Future<void> initialize() async {
     await _controller.initialize();
     await _controller.play();
+    setState(() {});
   }
 
   @override
