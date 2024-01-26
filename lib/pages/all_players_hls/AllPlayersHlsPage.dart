@@ -36,15 +36,15 @@ class _AllPlayersHlsPageState extends State<AllPlayersHlsPage> {
             const SizedBox(
               height: 20,
             ),
-            const Text("FijkPlayer: "),
-            FijkPlayerWidget(
+            const Text("MediaKitPlayer: "),
+            MediaKitPlayerWidget(
               videoUrl: Db.hlsUrl,
             ),
             const SizedBox(
               height: 20,
             ),
-            const Text("MediaKitPlayer: "),
-            MediaKitPlayerWidget(
+            const Text("FijkPlayer: "),
+            FijkPlayerWidget(
               videoUrl: Db.hlsUrl,
             ),
             const SizedBox(

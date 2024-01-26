@@ -33,15 +33,15 @@ class _HlsVsRtspPuroPageState extends State<HlsVsRtspPuroPage> {
             const SizedBox(
               height: 20,
             ),
-            const Text("FijkPlayer (RTSP):"),
-            FijkPlayerWidget(
+            const Text("MediaKitPlayer (RTSP):"),
+            MediaKitPlayerWidget(
               videoUrl: Db.rtspUrl,
             ),
             const SizedBox(
               height: 20,
             ),
-            const Text("MediaKitPlayer (RTSP):"),
-            MediaKitPlayerWidget(
+            const Text("FijkPlayer (RTSP):"),
+            FijkPlayerWidget(
               videoUrl: Db.rtspUrl,
             ),
             const SizedBox(

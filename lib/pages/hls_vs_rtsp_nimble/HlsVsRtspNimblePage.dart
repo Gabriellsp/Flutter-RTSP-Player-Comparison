@@ -36,15 +36,15 @@ class _HlsVsRtspNimblePageState extends State<HlsVsRtspNimblePage> {
             const SizedBox(
               height: 20,
             ),
-            const Text("FijkPlayer (RTSP Nimble):"),
-            FijkPlayerWidget(
+            const Text("MediaKitPlayer (RTSP Nimble):"),
+            MediaKitPlayerWidget(
               videoUrl: Db.rtspNimbleUrl,
             ),
             const SizedBox(
               height: 20,
             ),
-            const Text("MediaKitPlayer (RTSP Nimble):"),
-            MediaKitPlayerWidget(
+            const Text("FijkPlayer (RTSP Nimble):"),
+            FijkPlayerWidget(
               videoUrl: Db.rtspNimbleUrl,
             ),
             const SizedBox(
