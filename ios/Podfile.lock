@@ -13,7 +13,7 @@ PODS:
     - Flutter
   - media_kit_video (0.0.1):
     - Flutter
-  - MobileVLCKit (3.6.0b10)
+  - MobileVLCKit (3.6.0b11)
   - package_info_plus (0.4.5):
     - Flutter
   - screen_brightness_ios (0.1.0):
@@ -76,7 +76,7 @@ SPEC CHECKSUMS:
   media_kit_libs_ios_video: a5fe24bc7875ccd6378a0978c13185e1344651c1
   media_kit_native_event_loop: e6b2ab20cf0746eb1c33be961fcf79667304fa2a
   media_kit_video: 5da63f157170e5bf303bf85453b7ef6971218a2e
-  MobileVLCKit: 5600003cf2dc47acf7ad2fd87fe9f3739b2475ed
+  MobileVLCKit: d20b1e96a93446d97abd377a1daa230202147619
   package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   screen_brightness_ios: 715ca807df953bf676d339f11464e438143ee625
   video_player_avfoundation: e9e6f9cae7d7a6d9b43519b0aab382bca60fcfd1
@@ -85,4 +85,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
 
-COCOAPODS: 1.14.2
+COCOAPODS: 1.15.2
