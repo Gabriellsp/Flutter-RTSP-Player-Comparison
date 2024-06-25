@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_player/db/db.dart';
 import 'package:flutter_player/pages/compare_two_players/SelectTwoPlayers.dart';
-import 'package:flutter_player/pages/players/FijkPlayer/FijkPlayerWidget.dart';
 import 'package:flutter_player/pages/players/MediaKit/MediaKitPlayerWidget.dart';
 import 'package:flutter_player/pages/players/VideoPlayer/VideoPlayerWidget.dart';
 import 'package:flutter_player/pages/players/VlcPlayer/VlcPlayerWidget.dart';
@@ -52,8 +51,6 @@ class _CompareTwoPlayersState extends State<CompareTwoPlayers> {
         return VideoPlayerWidget(videoUrl: videoUrl);
       case Players.VlcPlayer:
         return VlcPlayerWidget(videoUrl: videoUrl);
-      case Players.FijkPlayer:
-        return FijkPlayerWidget(videoUrl: videoUrl);
       case Players.MediaKit:
         return MediaKitPlayerWidget(videoUrl: videoUrl);
     }

@@ -18,9 +18,19 @@ class _VlcPlayerWidgetState extends State<VlcPlayerWidget> {
     super.initState();
     _controller = VlcPlayerController.network(
       widget.videoUrl,
-      hwAcc: HwAcc.full,
       autoPlay: true,
-      options: VlcPlayerOptions(),
+      hwAcc: HwAcc.full,
+      options: VlcPlayerOptions(
+        advanced: VlcAdvancedOptions([
+          VlcAdvancedOptions.networkCaching(2000),
+        ]),
+        http: VlcHttpOptions([
+          VlcHttpOptions.httpReconnect(true),
+        ]),
+        rtp: VlcRtpOptions([
+          VlcRtpOptions.rtpOverRtsp(true),
+        ]),
+      ),
     );
     _controller.addListener(() => _checkErrorPlayer());
   }
@@ -34,9 +44,10 @@ class _VlcPlayerWidgetState extends State<VlcPlayerWidget> {
   }
 
   @override
-  void dispose() async {
+  Future<void> dispose() async {
     _controller.removeListener(() => _checkErrorPlayer());
     await _controller.stop();
+    await _controller.stopRecording();
     await _controller.stopRendererScanning();
     await _controller.dispose();
     super.dispose();

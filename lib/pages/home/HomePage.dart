@@ -4,7 +4,6 @@ import 'package:flutter_player/db/db.dart';
 import 'package:flutter_player/pages/compare_two_players/SelectTwoPlayers.dart';
 import 'package:flutter_player/pages/hls_vs_rtsp_nimble/HlsVsRtspNimblePage.dart';
 import 'package:flutter_player/pages/hls_vs_rtsp_puro/HlsVsRtspPuroPage.dart';
-import 'package:flutter_player/pages/players/FijkPlayer/SelectFijkPlayerUrl.dart';
 import 'package:flutter_player/pages/players/MediaKit/SelectMediaKitPlayerUrl.dart';
 import 'package:flutter_player/pages/players/VideoPlayer/SelectVideoPlayerUrl.dart';
 import 'package:flutter_player/pages/players/VlcPlayer/SelectVlcPlayerUrl.dart';
@@ -151,19 +150,6 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: const Text(
                       'VlcPlayer',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SelectFijkPlayerUrl()),
-                      );
-                    },
-                    child: const Text(
-                      'FijkPlayer',
                       textAlign: TextAlign.center,
                     ),
                   ),

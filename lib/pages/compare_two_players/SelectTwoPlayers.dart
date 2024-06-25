@@ -4,7 +4,6 @@ import 'package:flutter_player/pages/compare_two_players/CompareTwoPlayers.dart'
 enum Players {
   VideoPlayer,
   VlcPlayer,
-  FijkPlayer,
   MediaKit,
 }
 
@@ -82,17 +81,6 @@ class _SelectTwoPlayersState extends State<SelectTwoPlayers> {
                       value: Players.VlcPlayer,
                       child: Text(
                         Players.VlcPlayer.name,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 1.25,
-                        ),
-                      ),
-                    ),
-                    DropdownMenuItem<Players>(
-                      value: Players.FijkPlayer,
-                      child: Text(
-                        Players.FijkPlayer.name,
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -224,17 +212,6 @@ class _SelectTwoPlayersState extends State<SelectTwoPlayers> {
                       value: Players.VlcPlayer,
                       child: Text(
                         Players.VlcPlayer.name,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 1.25,
-                        ),
-                      ),
-                    ),
-                    DropdownMenuItem<Players>(
-                      value: Players.FijkPlayer,
-                      child: Text(
-                        Players.FijkPlayer.name,
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,

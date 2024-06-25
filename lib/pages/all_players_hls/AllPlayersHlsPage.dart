@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_player/db/db.dart';
-import 'package:flutter_player/pages/players/FijkPlayer/FijkPlayerWidget.dart';
 import 'package:flutter_player/pages/players/MediaKit/MediaKitPlayerWidget.dart';
 import 'package:flutter_player/pages/players/VideoPlayer/VideoPlayerWidget.dart';
 import 'package:flutter_player/pages/players/VlcPlayer/VlcPlayerWidget.dart';
@@ -38,13 +37,6 @@ class _AllPlayersHlsPageState extends State<AllPlayersHlsPage> {
             ),
             const Text("MediaKitPlayer: "),
             MediaKitPlayerWidget(
-              videoUrl: Db.hlsUrl,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text("FijkPlayer: "),
-            FijkPlayerWidget(
               videoUrl: Db.hlsUrl,
             ),
             const SizedBox(

@@ -1,0 +1,92 @@
+  google_intern_test_workflow:
+    name: RTSP Player Comparison - Play Store Internal Testing Publishing
+    environment:
+      flutter: 3.19.6
+      groups:
+        - google_play
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: |
+          flutter clean
+          flutter pub get
+      - name: Build AAB with Flutter
+        script: |
+          flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64 --obfuscate --split-debug-info=build/**/outputs/symbols --no-shrink
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - mobile@seventh.com.br
+          - gabriel.pereira@seventh.com.br
+        notify:
+          success: true
+          failure: false
+      google_play:
+        credentials: $SEVENTH_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true
+  
+  apple_intern_test_workflow:
+    name: RTSP Player Comparison - App Store Internal Testing Publishing
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      flutter: 3.19.6
+      xcode: 15.4
+      groups:
+        - app_store
+        - apple_certificate
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter clean
+          flutter pub get
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir rm -rf Pods Podfile.lock \;
+          find . -name "Podfile" -execdir pod cache clean --all \;
+          find . -name "Podfile" -execdir pod install \;
+      - name: Set up code signing settings
+        script: |
+          set -e
+          keychain initialize
+          app-store-connect fetch-signing-files "com.seventh.rtsp-players-comparison" --type IOS_APP_STORE --private-key="$APP_STORE_API_KEY_DEV" --key-id="$APP_STORE_API_KEY_ID_DEV" --issuer-id="$APP_STORE_ISSUER_ID_DEV" --create
+          if [[ $? -ne 0 ]]; then
+            echo "Erro ao obter assinaturas!"
+          else
+            echo "Adicionando certificados.."
+            keychain add-certificates
+            xcode-project use-profiles
+          fi
+      - name: Flutter build ipa
+        script: |
+          flutter build ipa --release --obfuscate --split-debug-info=build/**/outputs/symbols --export-options-plist=/Users/builder/export_options.plist -v
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - mobile@seventh.com.br
+          - gabriel.pereira@seventh.com.br
+        notify:
+          success: true
+          failure: false
+      app_store_connect:
+        api_key: $APP_STORE_API_KEY_DEV        
+        key_id: $APP_STORE_API_KEY_ID_DEV      
+        issuer_id: $APP_STORE_ISSUER_ID_DEV
+        submit_to_testflight: true
+        expire_build_submitted_for_review: true
+        beta_groups:
+          - Testers_Seventh
+        submit_to_app_store: false
