@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_player/pages/players/VlcPlayer/VlcPlayerWidget.dart';
+
+import 'VlcPlayerWidget.dart';
 
 class VlcPlayerPage extends StatefulWidget {
   final String videoUrl;

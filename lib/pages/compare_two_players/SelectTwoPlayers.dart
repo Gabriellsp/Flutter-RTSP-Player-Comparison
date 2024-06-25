@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_player/pages/compare_two_players/CompareTwoPlayers.dart';
+
+import 'CompareTwoPlayers.dart';
 
 enum Players {
   VideoPlayer,

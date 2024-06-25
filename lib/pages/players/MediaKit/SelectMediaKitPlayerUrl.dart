@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_player/db/db.dart';
-import 'package:flutter_player/pages/players/MediaKit/MediaKitPlayerPage.dart';
+
+import '../../../db/db.dart';
+import 'MediaKitPlayerPage.dart';
 
 class SelectMediaKitPlayerUrl extends StatefulWidget {
   const SelectMediaKitPlayerUrl({super.key});

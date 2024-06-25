@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_player/pages/home/HomePage.dart';
 import 'package:media_kit/media_kit.dart';
+
+import 'pages/home/HomePage.dart';
 
 void main() {
   MediaKit.ensureInitialized();

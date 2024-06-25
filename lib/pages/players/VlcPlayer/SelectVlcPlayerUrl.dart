@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_player/db/db.dart';
-import 'package:flutter_player/pages/players/VlcPlayer/VlcPlayerPage.dart';
+
+import '../../../db/db.dart';
+import 'VlcPlayerPage.dart';
 
 class SelectVlcPlayerUrl extends StatelessWidget {
   const SelectVlcPlayerUrl({super.key});

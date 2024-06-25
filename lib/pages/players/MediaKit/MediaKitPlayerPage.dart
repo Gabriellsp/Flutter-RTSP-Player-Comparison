@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_player/pages/players/MediaKit/MediaKitPlayerWidget.dart';
+
+import 'MediaKitPlayerWidget.dart';
 
 class MediaKitPlayerPage extends StatefulWidget {
   final String videoUrl;

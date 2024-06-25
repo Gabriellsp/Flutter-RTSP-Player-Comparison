@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_player/pages/all_players_hls/AllPlayersHlsPage.dart';
-import 'package:flutter_player/db/db.dart';
-import 'package:flutter_player/pages/compare_two_players/SelectTwoPlayers.dart';
-import 'package:flutter_player/pages/hls_vs_rtsp_nimble/HlsVsRtspNimblePage.dart';
-import 'package:flutter_player/pages/hls_vs_rtsp_puro/HlsVsRtspPuroPage.dart';
-import 'package:flutter_player/pages/players/MediaKit/SelectMediaKitPlayerUrl.dart';
-import 'package:flutter_player/pages/players/VideoPlayer/SelectVideoPlayerUrl.dart';
-import 'package:flutter_player/pages/players/VlcPlayer/SelectVlcPlayerUrl.dart';
+
+import '../../db/db.dart';
+import '../all_players_hls/AllPlayersHlsPage.dart';
+import '../compare_two_players/SelectTwoPlayers.dart';
+import '../hls_vs_rtsp_nimble/HlsVsRtspNimblePage.dart';
+import '../hls_vs_rtsp_puro/HlsVsRtspPuroPage.dart';
+import '../players/MediaKit/SelectMediaKitPlayerUrl.dart';
+import '../players/VideoPlayer/SelectVideoPlayerUrl.dart';
+import '../players/VlcPlayer/SelectVlcPlayerUrl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

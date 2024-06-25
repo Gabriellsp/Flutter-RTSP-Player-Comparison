@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_player/db/db.dart';
-import 'package:flutter_player/pages/compare_two_players/SelectTwoPlayers.dart';
-import 'package:flutter_player/pages/players/MediaKit/MediaKitPlayerWidget.dart';
-import 'package:flutter_player/pages/players/VideoPlayer/VideoPlayerWidget.dart';
-import 'package:flutter_player/pages/players/VlcPlayer/VlcPlayerWidget.dart';
+
+import '../../db/db.dart';
+import '../players/MediaKit/MediaKitPlayerWidget.dart';
+import '../players/VideoPlayer/VideoPlayerWidget.dart';
+import '../players/VlcPlayer/VlcPlayerWidget.dart';
+import 'SelectTwoPlayers.dart';
 
 class CompareTwoPlayers extends StatefulWidget {
   final SelectedPlayers selectedPlayers;

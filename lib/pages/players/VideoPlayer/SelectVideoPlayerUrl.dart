@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_player/db/db.dart';
-import 'package:flutter_player/pages/players/VideoPlayer/VideoPlayerPage.dart';
+import 'package:flutter_rtsp_player_comparison/db/db.dart';
+import 'package:flutter_rtsp_player_comparison/pages/players/VideoPlayer/VideoPlayerPage.dart';
 
 class SelectVideoPlayerUrl extends StatelessWidget {
   const SelectVideoPlayerUrl({super.key});

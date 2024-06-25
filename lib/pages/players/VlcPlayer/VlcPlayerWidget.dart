@@ -21,16 +21,18 @@ class _VlcPlayerWidgetState extends State<VlcPlayerWidget> {
       autoPlay: true,
       hwAcc: HwAcc.full,
       options: VlcPlayerOptions(
-        advanced: VlcAdvancedOptions([
-          VlcAdvancedOptions.networkCaching(2000),
-        ]),
-        http: VlcHttpOptions([
-          VlcHttpOptions.httpReconnect(true),
-        ]),
-        rtp: VlcRtpOptions([
-          VlcRtpOptions.rtpOverRtsp(true),
-        ]),
-      ),
+          advanced: VlcAdvancedOptions([
+            VlcAdvancedOptions.networkCaching(300),
+          ]),
+          http: VlcHttpOptions([
+            VlcHttpOptions.httpReconnect(true),
+          ]),
+          extras: [
+            ':high-priority',
+            ':rtsp-mcast',
+            ':rtsp-tcp',
+            ':avcodec-hw=any',
+          ]),
     );
     _controller.addListener(() => _checkErrorPlayer());
   }
@@ -45,12 +47,11 @@ class _VlcPlayerWidgetState extends State<VlcPlayerWidget> {
 
   @override
   Future<void> dispose() async {
-    _controller.removeListener(() => _checkErrorPlayer());
-    await _controller.stop();
+    super.dispose();
+    _controller.removeListener(_checkErrorPlayer);
     await _controller.stopRecording();
     await _controller.stopRendererScanning();
     await _controller.dispose();
-    super.dispose();
   }
 
   @override

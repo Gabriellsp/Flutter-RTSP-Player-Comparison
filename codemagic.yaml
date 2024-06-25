@@ -58,7 +58,7 @@
         script: |
           set -e
           keychain initialize
-          app-store-connect fetch-signing-files "com.seventh.rtsp-players-comparison" --type IOS_APP_STORE --private-key="$APP_STORE_API_KEY_DEV" --key-id="$APP_STORE_API_KEY_ID_DEV" --issuer-id="$APP_STORE_ISSUER_ID_DEV" --create
+          app-store-connect fetch-signing-files "com.seventh.rtsp-players-comparison" --type IOS_APP_STORE --private-key="$APP_STORE_API_KEY" --key-id="$APP_STORE_API_KEY_ID" --issuer-id="$APP_STORE_ISSUER_ID" --create
           if [[ $? -ne 0 ]]; then
             echo "Erro ao obter assinaturas!"
           else
@@ -82,9 +82,9 @@
           success: true
           failure: false
       app_store_connect:
-        api_key: $APP_STORE_API_KEY_DEV        
-        key_id: $APP_STORE_API_KEY_ID_DEV      
-        issuer_id: $APP_STORE_ISSUER_ID_DEV
+        api_key: $APP_STORE_API_KEY        
+        key_id: $APP_STORE_API_KEY_ID      
+        issuer_id: $APP_STORE_ISSUER_ID
         submit_to_testflight: true
         expire_build_submitted_for_review: true
         beta_groups:
